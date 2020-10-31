@@ -14,31 +14,32 @@ public class Ejercicio1 {
 	
 	
 	public static List<List<Integer>> leeFichero(String fichero) {
-        List<List<Integer>> texto = new ArrayList<List<Integer>>();
+        
+		List<List<Integer>> listaDeL = new ArrayList<List<Integer>>(); //Lista vacia para guardar los elementos que lea el metodo
 
         try {
-           BufferedReader bf = new BufferedReader (new FileReader(fichero));
+           BufferedReader bf = new BufferedReader (new FileReader(fichero));//Invoco al metodo bufferedReader para que lea el texto de una secuencia de entrada de caracteres
            String linea;
 
-
-            while((linea = bf.readLine()) != null) {
-                List<Integer> li = new ArrayList<Integer>();
-                if(linea.length() != 0) {
-                  li = Arrays.asList(linea.split(", "))
+            while((linea = bf.readLine()) != null) {	//mientras que siga leyendo lineas del fichero
+                List<Integer> li = new ArrayList<Integer>();	//lista vacia para almacenar cada línea
+                if(linea.length() != 0) {	//si la linea no esta vacia
+                  li = Arrays.asList(linea.split(", "))	//lee cada linea separada por comas y un espacio (segun el fichero)
                           .stream()
-                          .map(s->Integer.parseInt(s))
-                          .collect(Collectors.toList());
+                          .map(s->Integer.parseInt(s))	//lo parsea a entero 
+                          .collect(Collectors.toList());	//lo guarda en la lista
                 }
-                texto.add(li);
+                listaDeL.add(li);//y lo añade a la lista de listas
             } bf.close();
         }catch (Exception e) {
             System.err.println("Excepción capturada:" +e);
         }
-        return texto;
+        return listaDeL;
 
     }
 	
 	private static List<Integer> aplana(List<List<Integer>> numeros){
+		//Metodo para hacer el aplanamiento de la lista de listas
 		List<Integer> lis = numeros.stream()
 				.flatMap(List::stream)
 				.collect(Collectors.toList());
@@ -48,33 +49,47 @@ public class Ejercicio1 {
 	}
 	
 	
-	
-	
 	public static List<Integer> filtraLosPrimos(List<Integer> listas){
 		
-		List<Integer> nums = new ArrayList<>();
+		List<Integer> nums = new ArrayList<>();	//Lista de integer vacia que utilizare para la salida
 	
+		Integer i = 0;	//vriable que itera sobre cada uno de los elementos de la lista
+		Integer res = 0;//varaible acumuladora
 		
-		Integer i = 1;
-		Integer res = 0;
-		
-		while(i<listas.size()) {
-			if(Math2.esPrimo(listas.get(i))==true) {
-				res = listas.get(i);
-				nums.add(res);
+		while(i<listas.size()) {//mientras que el tamaño del iterador sea menor que el de la lista de entrada..
+			if(Math2.esPrimo(listas.get(i))==true) {//si el elemento que estoy iterando es primo 
+				res = listas.get(i);	//obtengo el elemento y lo añado al acumulador res
+				nums.add(res);//añado el elemento a la lista de salida
 			}
 			
-			i++;
-
+			i++;//incremento el iterador
 		}
-		return nums;
+		return nums;	//devuelvo la lista
 	}
+	
+//	public static List<Integer> filtraLosPrimos(List<List<Integer>> ls){
+//		List<Integer> nums = new ArrayList<>();
+//		Integer i = 0;
+//		Integer res = 0;
+//		
+//		while(i<ls.size()) {
+//			Iterator<Integer> it = ls.get(i).iterator();
+//			while(it.hasNext()) {
+//				if(Math2.esPrimo(ls.get(i))==true) {
+//					res = ls.get(i);
+//					nums.add(res);
+//				}
+//			
+//				i++;
+//			}
+//		}
+//	}
 	
 
 	public static void main(String[] args) {
+		
 		List<List<Integer>> numeros = leeFichero("./ficheros/PI1Ej1DatosEntrada.txt");
 		List<Integer> aplanados = aplana(numeros);
-//		System.out.println(aplanados.size());
 		List<Integer> primos = filtraLosPrimos(aplanados);
 		System.out.println("La lista de números primos es " + primos);
 		
