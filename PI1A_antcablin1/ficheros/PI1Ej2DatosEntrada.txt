@@ -1,5 +1,0 @@
-Limite: 7
-Limite: 10
-Limite: 46
-Limite: 23
-Limite: 27
