@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 import us.lsi.math.Math2;
@@ -18,7 +19,8 @@ public class Ejercicio1 {
 		List<List<Integer>> listaDeL = new ArrayList<List<Integer>>(); //Lista vacia para guardar los elementos que lea el metodo
 
         try {
-           BufferedReader bf = new BufferedReader (new FileReader(fichero));//Invoco al metodo bufferedReader para que lea el texto de una secuencia de entrada de caracteres
+           BufferedReader bf = new BufferedReader (new FileReader(fichero));//Invoco al metodo bufferedReader para que lea el 
+           																	//texto de una secuencia de entrada de caracteres
            String linea;
 
             while((linea = bf.readLine()) != null) {	//mientras que siga leyendo lineas del fichero
@@ -38,59 +40,30 @@ public class Ejercicio1 {
 
     }
 	
-	private static List<Integer> aplana(List<List<Integer>> numeros){
-		//Metodo para hacer el aplanamiento de la lista de listas
-		List<Integer> lis = numeros.stream()
-				.flatMap(List::stream)
-				.collect(Collectors.toList());
-		
-		return lis;
-		
-	}
 	
-	
-	public static List<Integer> filtraLosPrimos(List<Integer> listas){
+	public static List<Integer> filtraLosPrimos(List<List<Integer>> ls){
+		List<Integer> nums = new ArrayList<>();	//Declaro la lista donde voy a almacenar los resultados
+		Integer i = 0;	//Declaro el iterador
 		
-		List<Integer> nums = new ArrayList<>();	//Lista de integer vacia que utilizare para la salida
-	
-		Integer i = 0;	//vriable que itera sobre cada uno de los elementos de la lista
-		Integer res = 0;//varaible acumuladora
-		
-		while(i<listas.size()) {//mientras que el tamaño del iterador sea menor que el de la lista de entrada..
-			if(Math2.esPrimo(listas.get(i))==true) {//si el elemento que estoy iterando es primo 
-				res = listas.get(i);	//obtengo el elemento y lo añado al acumulador res
-				nums.add(res);//añado el elemento a la lista de salida
-			}
-			
-			i++;//incremento el iterador
+		while(i<ls.size()){	//Mientras que el tamaño del iterador sea menor al de la lista sigo...
+				ListIterator<Integer> iter = ls.get(i).listIterator();	//Invoco a listIterator para poder "aplanar" las listas
+				
+				while(iter.hasNext()){	//Mientras que el iterador se siga encontrando con elementos anteriormente no iterados sigo...
+					Integer e = iter.next();	//En la variable e voy almacenando los siguientes elementos de la lista
+					if(Math2.esPrimo(e)==true)	//Si el elemento iterado cumple la condicion de que es primo
+						nums.add(e);	//lo almaceno en mi lista resultado
+		        }
+		i++;
 		}
-		return nums;	//devuelvo la lista
+		
+		return nums;
 	}
-	
-//	public static List<Integer> filtraLosPrimos(List<List<Integer>> ls){
-//		List<Integer> nums = new ArrayList<>();
-//		Integer i = 0;
-//		Integer res = 0;
-//		
-//		while(i<ls.size()) {
-//			Iterator<Integer> it = ls.get(i).iterator();
-//			while(it.hasNext()) {
-//				if(Math2.esPrimo(ls.get(i))==true) {
-//					res = ls.get(i);
-//					nums.add(res);
-//				}
-//			
-//				i++;
-//			}
-//		}
-//	}
 	
 
 	public static void main(String[] args) {
 		
 		List<List<Integer>> numeros = leeFichero("./ficheros/PI1Ej1DatosEntrada.txt");
-		List<Integer> aplanados = aplana(numeros);
-		List<Integer> primos = filtraLosPrimos(aplanados);
+		List<Integer> primos = filtraLosPrimos(numeros);
 		System.out.println("La lista de números primos es " + primos);
 		
 	}
