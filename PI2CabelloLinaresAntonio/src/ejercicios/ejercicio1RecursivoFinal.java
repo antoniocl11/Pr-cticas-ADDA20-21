@@ -22,7 +22,7 @@ public class ejercicio1RecursivoFinal {
 				//Si el elemento del medio es igual voy a buscar el distinto empezando por el medio y yendo para la derecha
 				if(cadena1.charAt(it) != cadena2.charAt(it)) { //si iterando las cadenas encuentro un caracter distinto(comparando las dos cadenas)
 					
-					posicion = it+1; //obtengo la posicion mas 1 pq empieza a iterar desde 0
+					posicion = it+1; // obtengo la posicion del elemento por la derecha
 					return posicion;
 				}
 				

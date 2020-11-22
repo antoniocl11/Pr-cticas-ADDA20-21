@@ -21,11 +21,12 @@ public class ejercicio1Iterativo {
 				// Si el elemento del medio es igual voy a buscar el distinto empezando por el
 				// medio y yendo para la derecha
 				if (cadena1.charAt(it) != cadena2.charAt(it)) { // si iterando las cadenas por el
-																				// principio y hacia la derecha
+																				// principio
 																				// encuentro un caracter
 																				// distinto(comparando las dos cadenas)
 
-					posicion = it + 1; // obtengo la posicion mas 1 pq empieza a iterar desde 0
+					posicion = it + 1; // obtengo la posicion del elemento por la derecha
+					
 					return posicion;
 				}
 
@@ -35,7 +36,7 @@ public class ejercicio1Iterativo {
 			}
 
 			else if (cadena1.charAt(it) != cadena2.charAt(it)) {
-				
+				//si el elemento que me encuentro en medio es distinto en las dos cadenas, estará en la izquierda (it-1)
 
 				if (cadena1.charAt(it - 1) == cadena2.charAt(it - 1)) {// si iterando las cadenas por el
 																						// principio y hacia la
