@@ -16,6 +16,9 @@
 #include "ejercicios/ejercicio1Recursivo.h"
 #include "ejercicios/ejercicio2Iterativo.h"
 #include "ejercicios/ejercicio2Recursivo.h"
+#include "ejercicios/ejercicio3Iterativo.h"
+#include "ejercicios/ejercicio3RecursivoFinal.h"
+#include "ejercicios/ejercicio3RecursivoNoFinal.h"
 
 #include "types/iterables.h"
 #include "types/list.h"
@@ -25,6 +28,7 @@ int main();
 
 void testEj1(char * file);
 void testEj2(char * file);
+void testEj3(char * file3);
 
 
 void parsearLista(list * ls, char * cadena);
