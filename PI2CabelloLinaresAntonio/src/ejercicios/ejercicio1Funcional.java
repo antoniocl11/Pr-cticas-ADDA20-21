@@ -7,9 +7,7 @@ import java.util.stream.Stream;
 
 public class ejercicio1Funcional {
 	
-	
-	//mi intencion en este ejercicio era realizarlo de la misma forma que el 3(funcional)
-	//pero resulta ser bucle infinito y no encuentro la razon..
+	//misma metodologia que en el ejercicio 3 funcional pero bucle infinito..
 	
 	public static Integer cadenasFuncional(String cadena1, String cadena2) {
 		
